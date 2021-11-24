@@ -23,9 +23,9 @@ use clap::App;
 
 use sp_core::sr25519;
 
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::{Api, Metadata};
 use std::convert::TryFrom;
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::{Api, Metadata};
 
 fn main() {
     env_logger::init();

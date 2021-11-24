@@ -1,7 +1,7 @@
 [package]
-name = "substrate-api-client"
-version = "0.6.0"
-authors = ["Supercomputing Systems AG <info@scs.ch>"]
+name = "fire-api-client"
+version = "0.1.0"
+authors = ["5ireChain"]
 edition = "2021"
 
 [workspace]
@@ -86,20 +86,12 @@ name = "example_get_storage"
 path = "src/examples/example_get_storage.rs"
 
 [[example]]
-name = "example_get_blocks"
-path = "src/examples/example_get_blocks.rs"
-
-[[example]]
 name = "example_transfer"
 path = "src/examples/example_transfer.rs"
 
 [[example]]
 name = "example_event_error_details"
 path = "src/examples/example_event_error_details.rs"
-
-[[example]]
-name = "example_event_callback"
-path = "src/examples/example_event_callback.rs"
 
 [[example]]
 name = "example_generic_extrinsic"
@@ -109,18 +101,6 @@ path = "src/examples/example_generic_extrinsic.rs"
 [[example]]
 name = "example_print_metadata"
 path = "src/examples/example_print_metadata.rs"
-
-[[example]]
-name = "example_compose_extrinsic_offline"
-path = "src/examples/example_compose_extrinsic_offline.rs"
-
-[[example]]
-name = "example_generic_event_callback"
-path = "src/examples/example_generic_event_callback.rs"
-
-[[example]]
-name = "example_benchmark_bulk_xt"
-path = "src/examples/example_benchmark_bulk_xt.rs"
 
 [[example]]
 name = "example_sudo"

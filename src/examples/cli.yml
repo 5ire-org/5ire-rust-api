@@ -1,7 +1,7 @@
-name: "substrate-api-client-examples"
+name: "fire-api-client-examples"
 version: "1.0.0"
 about: Example codes showing the api's capabilities
-authors: "Supercomputing Systems AG <info@scs.ch>"
+authors: "5ireChain"
 
 # AppSettings can be defined as a list and are **not** ascii case sensitive
 settings:

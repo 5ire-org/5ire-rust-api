@@ -18,12 +18,12 @@
 
 use clap::{load_yaml, App};
 use codec::Compact;
-use keyring::AccountKeyring;
-use sp_core::crypto::Pair;
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::{
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::{
     compose_call, compose_extrinsic, Api, GenericAddress, UncheckedExtrinsicV4, XtStatus,
 };
+use keyring::AccountKeyring;
+use sp_core::crypto::Pair;
 
 fn main() {
     env_logger::init();

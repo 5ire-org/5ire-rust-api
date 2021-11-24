@@ -16,10 +16,10 @@
 ///! Very simple example that shows how to get some simple storage values.
 use clap::{load_yaml, App};
 
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::AccountInfo;
+use fire_api_client::Api;
 use keyring::AccountKeyring;
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::AccountInfo;
-use substrate_api_client::Api;
 
 fn main() {
     env_logger::init();

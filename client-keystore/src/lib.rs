@@ -68,7 +68,7 @@ impl LocalKeystore {
     }
 }
 
-/// This is an extension from the substrate-api-client repo. Keep it as a separate trait to
+/// This is an extension from the fire-api-client repo. Keep it as a separate trait to
 /// make that clear.
 pub trait KeystoreExt {
     fn generate<Pair: AppPair>(&self) -> Result<Pair>;

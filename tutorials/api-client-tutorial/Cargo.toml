@@ -1,11 +1,11 @@
 [package]
-name = "api-client-tutorial"
-version = "0.6.0"
-authors = ["Supercomputing Systems AG <info@scs.ch>"]
+name = "fire-client-tutorial"
+version = "0.1.0"
+authors = ["5ireChain"]
 edition = "2021"
 
 [dependencies]
-substrate-api-client = { path = "../.." }
+fire-api-client = { path = "../.." }
 codec = { package = "parity-scale-codec", features = ["derive"], version = "2.0.0" }
 
 sp-core = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "master" }

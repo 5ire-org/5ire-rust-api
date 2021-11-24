@@ -19,8 +19,8 @@ use keyring::AccountKeyring;
 use sp_core::crypto::Pair;
 use sp_runtime::MultiAddress;
 
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::{Api, XtStatus};
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::{Api, XtStatus};
 
 fn main() {
     env_logger::init();

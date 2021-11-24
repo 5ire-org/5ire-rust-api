@@ -15,9 +15,9 @@ limitations under the License.
 
 ///! Very simple example that shows how to get some simple storage values.
 use clap::{load_yaml, App};
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::Api;
 use sp_runtime::app_crypto::sp_core::sr25519;
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::Api;
 
 fn main() {
     env_logger::init();

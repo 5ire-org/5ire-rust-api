@@ -46,8 +46,8 @@ pub trait RpcClient {
 /// # Custom Client Example
 ///
 /// ```no_run
-/// use substrate_api_client::rpc::json_req::author_submit_extrinsic;
-/// use substrate_api_client::{
+/// use fire_api_client::rpc::json_req::author_submit_extrinsic;
+/// use fire_api_client::{
 ///     Api, ApiClientError, ApiResult, FromHexString, Hash, RpcClient, Value, XtStatus,
 /// };
 /// struct MyClient {

@@ -17,13 +17,13 @@ use std::sync::mpsc::channel;
 
 use clap::{load_yaml, App};
 use codec::Decode;
+use fire_api_client::rpc::WsRpcClient;
+use fire_api_client::{Api, ApiResult, XtStatus};
 use keyring::AccountKeyring;
 use sp_core::crypto::Pair;
 use sp_runtime::app_crypto::sp_core::sr25519;
 use sp_runtime::AccountId32 as AccountId;
 use sp_runtime::MultiAddress;
-use substrate_api_client::rpc::WsRpcClient;
-use substrate_api_client::{Api, ApiResult, XtStatus};
 
 // Look at the how the transfer event looks like in in the metadata
 #[derive(Decode)]

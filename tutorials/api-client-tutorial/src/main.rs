@@ -1,71 +1,16 @@
-/*
-    Copyright 2019 Supercomputing Systems AG
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
+use fire_api_client::{rpc::WsRpcClient, Api, Metadata};
 
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
-use codec::{Decode, Encode};
-use sp_core::crypto::Pair;
-use sp_keyring::AccountKeyring;
-
-use substrate_api_client::{
-    compose_extrinsic, rpc::WsRpcClient, utils::FromHexString, Api, UncheckedExtrinsicV4, XtStatus,
-};
-
-#[derive(Encode, Decode, Debug)]
-struct Kitty {
-    id: [u8; 32],
-    price: u128,
-}
+use sp_core::sr25519;
 
 fn main() {
-    let url = "ws://127.0.0.1:9944";
-
-    let signer = AccountKeyring::Alice.pair();
+    // instantiate an Api that connects to the given address
+    let url = "ws://110.238.108.183:9947";
+    //let url = "ws://127.0.0.1:9944";
     let client = WsRpcClient::new(url);
+    // if no signer is set in the whole program, we need to give to Api a specific type instead of an associated type
+    // as during compilation the type needs to be defined.
+    let api = Api::<sr25519::Pair, WsRpcClient>::new(client).unwrap();
 
-    let api = Api::new(client)
-        .map(|api| api.set_signer(signer.clone()))
-        .unwrap();
-
-    let xt: UncheckedExtrinsicV4<_> =
-        compose_extrinsic!(api, "KittyModule", "create_kitty", 10_u128);
-
-    println!("[+] Extrinsic: {:?}\n", xt);
-
-    let tx_hash = api
-        .send_extrinsic(xt.hex_encode(), XtStatus::Finalized)
-        .unwrap()
-        .unwrap();
-    println!("[+] Transaction got finalized. Hash: {:?}\n", tx_hash);
-
-    // get the index at which Alice's Kitty resides. Alternatively, we could listen to the StoredKitty
-    // event similar to what we do in the example_contract.
-    let index: u64 = api
-        .get_storage_map("Kitty", "KittyIndex", Some(signer.public().encode()), None)
-        .unwrap()
-        .unwrap();
-
-    println!("[+] Alice's Kitty is at index : {}\n", index);
-
-    // get the Kitty
-    let res_str = api
-        .get_storage_map("Kitty", "Kitties", Some(index.encode()), None)
-        .unwrap()
-        .unwrap();
-
-    let res_vec = Vec::from_hex(res_str).unwrap();
-
-    // type annotations are needed here to know that to decode into.
-    let kitty: Kitty = Decode::decode(&mut res_vec.as_slice()).unwrap();
-    println!("[+] Cute decoded Kitty: {:?}\n", kitty);
+    let meta = api.get_metadata().unwrap();
+    println!("Metadata:\n {}", Metadata::pretty_format(&meta).unwrap());
 }

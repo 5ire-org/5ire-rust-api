@@ -30,7 +30,7 @@ use sp_core::H256 as Hash;
 use sp_runtime::AccountId32 as AccountId;
 use sp_std::prelude::*;
 
-use substrate_api_client::{Api, XtStatus};
+use fire_api_client::{Api, XtStatus};
 
 
 // Lookup the details on the event from the metadata

@@ -1,10 +1,4 @@
-# substrate-api-client
-
-<p align="center">
-<img src=./web3_foundation_grants_badge_black.svg width = 400>
-</p>
-
-substrate-api-client a library written in Rust for connecting to the substrate's RPC interface via WebSockets allowing to
+# 5ire-rust-api 
 
 * Compose extrinsics, send them and subscribe to updates (synchronously).
 * supports composing extrinsics for `no_std` builds
@@ -13,7 +7,7 @@ substrate-api-client a library written in Rust for connecting to the substrate's
 
 ## Prerequisites
 
-In order to build the substrate-api-client and the examples, Rust and the wasm target are needed. For Linux:
+In order to build the 5ire-rust-api and the examples, Rust and the wasm target are needed. For Linux:
 
     curl https://sh.rustup.rs -sSf | sh
 
@@ -22,29 +16,17 @@ In order to build the substrate-api-client and the examples, Rust and the wasm t
 
 For more information, please refer to the [substrate](https://github.com/paritytech/substrate) repository.
 
-## Substrate node
-
-To execute the examples, a running substrate node is needed. You can download our node artifact from our GitHub Actions
-CI, which can be found in the 'Actions' tab.
-
-The unpacked node can be run with:
-
-```
-./node-template --dev
-```
-
-
 ## Tutorial
 
 There is a detailed tutorial in the [tutorials](/tutorials) folder.
 
 ## Examples
 
-To run an example, clone the `substrate-api-client` repository and run the desired example directly with the cargo command:
+To run an example, clone the `5ire-rust-api` repository and run the desired example directly with the cargo command:
 
 ```bash
-    git clone https://github.com/scs/substrate-api-client.git
-    cd substrate-api-client
+    git clone https://github.com/5ire-org/5ire-rust-api.git
+    cd 5ire-rust-api
     cargo run --example example_get_storage
 ```
 
@@ -60,15 +42,3 @@ The following examples can be found in the [examples](/src/examples) folder:
 * [example_get_storage](/src/examples/example_get_storage.rs): Read storage values.
 * [example_print_metadata](/src/examples/example_print_metadata.rs): Print the metadata of the node in a readable way.
 * [example_transfer](/src/examples/example_transfer.rs): Transfer tokens by using a wrapper of compose_extrinsic
-
-## Alternatives
-
-Parity offers a Rust client with similar functionality: https://github.com/paritytech/substrate-subxt
-
-## Acknowledgements
-
-The development of substrate-api-client is financed by [web3 foundation](https://web3.foundation/)'s grant programme.
-
-We also thank the teams at
-
-* [Parity Technologies](https://www.parity.io/) for building [substrate](https://github.com/paritytech/substrate) and supporting us during development.

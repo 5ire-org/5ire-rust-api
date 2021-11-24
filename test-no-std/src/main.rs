@@ -4,7 +4,7 @@
 #![no_main]
 
 // DUT
-extern crate substrate_api_client;
+extern crate fire_api_client;
 
 // The libc crate allows importing functions from C.
 extern crate libc;

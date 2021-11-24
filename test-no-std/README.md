@@ -1,4 +1,4 @@
-This crate serves the purpose of testing no_std support of substrate-api-client
+This crate serves the purpose of testing no_std support of fire-api-client
 
 Just build it with 
 ```
