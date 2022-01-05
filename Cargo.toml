@@ -82,6 +82,26 @@ ws-client = ["ws"]
 staking-xt = ["std", "staking"]
 
 [[example]]
+name = "example_simple_connect"
+path = "src/examples/example_simple_connect.rs"
+
+[[example]]
+name = "example_traverse_events"
+path = "src/examples/example_traverse_events.rs"
+
+[[example]]
+name = "example_read_storage"
+path = "src/examples/example_read_storage.rs"
+
+[[example]]
+name = "example_read_storage_at_blockhash"
+path = "src/examples/example_read_storage_at_blockhash.rs"
+
+[[example]]
+name = "example_listen_new_blocks"
+path = "src/examples/example_listen_new_blocks.rs"
+
+[[example]]
 name = "example_get_storage"
 path = "src/examples/example_get_storage.rs"
 

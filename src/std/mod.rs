@@ -235,6 +235,21 @@ where
         }
     }
 
+    pub fn system_chain(&self) -> ApiResult<String> {
+        self.get_request(json_req::system_chain())
+            .and_then(|x| Ok(x.unwrap().trim_matches('"').to_string()))
+    }
+
+    pub fn system_name(&self) -> ApiResult<String> {
+        self.get_request(json_req::system_name())
+            .and_then(|x| Ok(x.unwrap().trim_matches('"').to_string()))
+    }
+
+    pub fn system_version(&self) -> ApiResult<String> {
+        self.get_request(json_req::system_version())
+            .and_then(|x| Ok(x.unwrap().trim_matches('"').to_string()))
+    }
+
     pub fn get_header<H>(&self, hash: Option<Hash>) -> ApiResult<Option<H>>
     where
         H: Header + DeserializeOwned,

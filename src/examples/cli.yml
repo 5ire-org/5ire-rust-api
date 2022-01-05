@@ -18,3 +18,8 @@ args:
       long: port
       help: Set the websocket port to listen for substrate events
       takes_value: true
+  - account:
+      short: a
+      long: account
+      help: Set the account by giving address
+      takes_value: true

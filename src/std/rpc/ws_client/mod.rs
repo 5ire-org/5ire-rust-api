@@ -91,6 +91,14 @@ where
             .map_err(|e| e.into())
     }
 
+    pub fn subscribe_new_heads(&self, sender: ThreadOut<String>) -> ApiResult<()> {
+        debug!("subscribing to new heads");
+        let jsonreq = json_req::chain_subscribe_new_heads().to_string();
+        self.client
+            .start_subscriber(jsonreq, sender)
+            .map_err(|e| e.into())
+    }
+
     pub fn wait_for_event<E: Decode>(
         &self,
         module: &str,
@@ -177,7 +185,7 @@ pub fn on_subscription_msg(msg: Message, out: Sender, result: ThreadOut<String>)
                         None => println!("No events happened"),
                     };
                 }
-                Some("chain_finalizedHead") => {
+                Some("chain_finalizedHead") | Some("chain_newHead") => {
                     let head = serde_json::to_string(&value["params"]["result"])
                         .map_err(|e| Box::new(RpcClientError::Serde(e)))?;
 

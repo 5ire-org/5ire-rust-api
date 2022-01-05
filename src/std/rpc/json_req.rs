@@ -50,6 +50,10 @@ pub fn chain_subscribe_finalized_heads() -> Value {
     json_req("chain_subscribeFinalizedHeads", Value::Null, 1)
 }
 
+pub fn chain_subscribe_new_heads() -> Value {
+    json_req("chain_subscribeNewHeads", Value::Null, 1)
+}
+
 pub fn payment_query_fee_details(xthex_prefixed: &str, at_block: Option<Hash>) -> Value {
     json_req(
         "payment_queryFeeDetails",
@@ -143,6 +147,18 @@ pub fn author_submit_extrinsic_with_id(xthex_prefixed: &str, id: u32) -> Value {
 
 pub fn author_submit_and_watch_extrinsic_with_id(xthex_prefixed: &str, id: u32) -> Value {
     json_req("author_submitAndWatchExtrinsic", vec![xthex_prefixed], id)
+}
+
+pub fn system_chain() -> Value {
+    json_req("system_chain", Value::Null, 1)
+}
+
+pub fn system_name() -> Value {
+    json_req("system_name", Value::Null, 1)
+}
+
+pub fn system_version() -> Value {
+    json_req("system_version", Value::Null, 1)
 }
 
 fn json_req<S: Serialize>(method: &str, params: S, id: u32) -> Value {

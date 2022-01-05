@@ -28,7 +28,7 @@ use frame_metadata::{
 use frame_support::serde::Serialize;
 use scale_info::{form::PortableForm, Type, Variant};
 use sp_core::storage::StorageKey;
-use std::{collections::HashMap, convert::TryFrom};
+use std::{collections::hash_map::Values, collections::HashMap, convert::TryFrom};
 
 /// Metadata error.
 #[derive(Debug, thiserror::Error)]
@@ -84,6 +84,10 @@ impl Metadata {
         self.pallets
             .get(name)
             .ok_or_else(|| MetadataError::PalletNotFound(name.to_string()))
+    }
+
+    pub fn pallets(&self) -> Values<String, PalletMetadata> {
+        self.pallets.values()
     }
 
     /// Returns the metadata for the event at the given pallet and event indices.
