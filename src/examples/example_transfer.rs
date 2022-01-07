@@ -1,49 +1,44 @@
-/*
-    Copyright 2019 Supercomputing Systems AG
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
-
 ///! Very simple example that shows how to use a predefined extrinsic from the extrinsic module
 use clap::{load_yaml, App};
-use keyring::AccountKeyring;
-use sp_core::crypto::Pair;
+use sp_core::crypto::Pair as TraitPair;
+use sp_core::sr25519::{Pair, Public};
 use sp_runtime::MultiAddress;
+use std::str::FromStr;
+use fire_api_client::{AccountId, Api, XtStatus, rpc::WsRpcClient};
 
-use fire_api_client::rpc::WsRpcClient;
-use fire_api_client::{Api, XtStatus};
+struct Config {
+    url: String,
+    signer_mnemonic: String,
+    destination_address: String,
+}
 
 fn main() {
     env_logger::init();
-    let url = get_node_url_from_cli();
+    let config = get_config_from_cli();
 
     // initialize api and set the signer (sender) that is used to sign the extrinsics
-    let from = AccountKeyring::Alice.pair();
-    let client = WsRpcClient::new(&url);
+    let (from, _) = Pair::from_phrase(
+        &config.signer_mnemonic,
+        None,
+    )
+    .unwrap();
+
+    let client = WsRpcClient::new(&config.url);
     let api = Api::new(client)
         .map(|api| api.set_signer(from.clone()))
         .unwrap();
 
-    let to = AccountKeyring::Bob.to_account_id();
+    let to: AccountId = Public::from_str(&config.destination_address).unwrap().into();
 
     match api.get_account_data(&to).unwrap() {
-        Some(bob) => println!("[+] Bob's Free Balance is is {}\n", bob.free),
-        None => println!("[+] Bob's Free Balance is is 0\n"),
+        Some(to) => println!("[+] Destination address' free balance is {}\n", to.free),
+        None => println!("[+] Destination address' free balance is is 0\n"),
     }
     // generate extrinsic
-    let xt = api.balance_transfer(MultiAddress::Id(to.clone()), 1000);
+    let xt = api.balance_transfer(MultiAddress::Id(to.clone()), 1000000000000000000);
 
     println!(
-        "Sending an extrinsic from Alice (Key = {}),\n\nto Bob (Key = {})\n",
+        "Transferring from {}, to {}\n",
         from.public(),
         to
     );
@@ -57,17 +52,23 @@ fn main() {
     println!("[+] Transaction got included. Hash: {:?}\n", tx_hash);
 
     // verify that Bob's free Balance increased
-    let bob = api.get_account_data(&to).unwrap().unwrap();
-    println!("[+] Bob's Free Balance is now {}\n", bob.free);
+    let to = api.get_account_data(&to).unwrap().unwrap();
+    println!("[+] Destination address' free balance is now {}\n", to.free);
 }
 
-pub fn get_node_url_from_cli() -> String {
-    let yml = load_yaml!("../../src/examples/cli.yml");
+fn get_config_from_cli() -> Config {
+    let yml = load_yaml!("../../src/examples/transfer-cli.yml");
     let matches = App::from_yaml(yml).get_matches();
 
     let node_ip = matches.value_of("node-server").unwrap_or("ws://127.0.0.1");
     let node_port = matches.value_of("node-port").unwrap_or("9944");
     let url = format!("{}:{}", node_ip, node_port);
+
     println!("Interacting with node on {}\n", url);
-    url
+
+    Config {
+        url,
+        signer_mnemonic: matches.value_of("from-mnemonic").unwrap().to_string(),
+        destination_address: matches.value_of("to-address").unwrap().to_string(),
+    }
 }
