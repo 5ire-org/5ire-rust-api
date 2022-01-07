@@ -34,11 +34,16 @@ Set the output verbosity by prepending `RUST_LOG=info` or `RUST_LOG=debug`.
 
 The following examples can be found in the [examples](/src/examples) folder:
 
-* [example_compose_extrinsic_offline](/src/examples/example_compose_extrinsic_offline.rs): Compose an extrinsic without interacting with the node.
-* [example_contract](/src/examples/example_contract.rs): Handle ink! contracts (put, create, and call). **DEPRECATED!**
-* [example_custom_storage_struct](/src/examples/example_custom_storage_struct.rs): Fetch and decode custom structs from the runtime. **DEPRECATED!**
-* [example_event_callback](/src/examples/example_event_callback.rs): Subscribe and react on events.
-* [example_generic_extrinsic](/src/examples/example_generic_extrinsic.rs): Compose an extrinsic for any call in any module by supplying the module and call name as strings.
-* [example_get_storage](/src/examples/example_get_storage.rs): Read storage values.
+* [example_simple_connect](/src/examples/example_simple_connect.rs): Connect to a node and print chain info.
 * [example_print_metadata](/src/examples/example_print_metadata.rs): Print the metadata of the node in a readable way.
-* [example_transfer](/src/examples/example_transfer.rs): Transfer tokens by using a wrapper of compose_extrinsic
+* [example_get_storage](/src/examples/example_get_storage.rs): Read storage values.
+* [example_read_storage](/src/examples/example_read_storage.rs): Read storage values.
+* [example_read_storage_at_blockhash](/src/examples/example_read_storage_at_blockhash.rs): Read storage values at a specific block.
+* [example_traverse_events](/src/)
+* [example_traverse_events](/src/examples/example_traverse_events.rs): Traverse events.
+* [example_generic_event_callback](/src/examples/example_generic_event_callback.rs): Subsribe and wait for an event.
+* [example_generic_extrinsic](/src/examples/example_generic_extrinsic.rs): Compose an extrinsic for any call in any module by supplying the module and call name as strings.
+* [example_listen_new_blocks](/src/examples/example_listen_new_blocks.rs): Listen to new blocks and print them.
+* [example_transfer](/src/examples/example_transfer.rs): Transfer tokens by using a wrapper of compose_extrinsic.
+* [example_sudo](/src/examples/example_sudo.rs): Do a sudo call to set balance.
+* [example_event_error_details](/src/examples/example_event_error_details.rs): Wait for an event and handle the event error.

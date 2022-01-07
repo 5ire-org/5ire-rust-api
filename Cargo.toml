@@ -117,7 +117,6 @@ path = "src/examples/example_event_error_details.rs"
 name = "example_generic_extrinsic"
 path = "src/examples/example_generic_extrinsic.rs"
 
-# Todo: #179
 [[example]]
 name = "example_print_metadata"
 path = "src/examples/example_print_metadata.rs"
@@ -129,8 +128,6 @@ path = "src/examples/example_sudo.rs"
 [[example]]
 name = "example_get_existential_deposit"
 path = "src/examples/example_get_existential_deposit.rs"
-
-# DEPRECATED. might work but too much work to maintain, sorry
 
 # needed for contract example
 #[dev-dependencies]
