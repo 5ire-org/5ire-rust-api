@@ -88,4 +88,13 @@ where
             Compact(reserved_balance)
         )
     }
+
+    pub fn balance_set_balance_in_unit(
+        &self,
+        who: GenericAddress,
+        free_balance: Balance,
+        reserved_balance: Balance,
+    ) -> BalanceSetBalanceXt {
+        self.balance_set_balance(who, free_balance * self.unit, reserved_balance * self.unit)
+    }
 }
