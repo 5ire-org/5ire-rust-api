@@ -1,10 +1,10 @@
 ///! Very simple example that shows how to use a predefined extrinsic from the extrinsic module
 use clap::{load_yaml, App};
+use fire_api_client::{rpc::WsRpcClient, AccountId, Api, XtStatus};
 use sp_core::crypto::Pair as TraitPair;
 use sp_core::sr25519::{Pair, Public};
 use sp_runtime::MultiAddress;
 use std::str::FromStr;
-use fire_api_client::{AccountId, Api, XtStatus, rpc::WsRpcClient};
 
 struct Config {
     url: String,
@@ -17,31 +17,25 @@ fn main() {
     let config = get_config_from_cli();
 
     // initialize api and set the signer (sender) that is used to sign the extrinsics
-    let (from, _) = Pair::from_phrase(
-        &config.signer_mnemonic,
-        None,
-    )
-    .unwrap();
+    let (from, _) = Pair::from_phrase(&config.signer_mnemonic, None).unwrap();
 
     let client = WsRpcClient::new(&config.url);
     let api = Api::new(client)
-        .map(|api| api.set_signer(from.clone()))
+        .map(|api| api.set_signer(from.clone()).set_unit(u128::pow(10, 18)))
         .unwrap();
 
-    let to: AccountId = Public::from_str(&config.destination_address).unwrap().into();
+    let to: AccountId = Public::from_str(&config.destination_address)
+        .unwrap()
+        .into();
 
     match api.get_account_data(&to).unwrap() {
         Some(to) => println!("[+] Destination address' free balance is {}\n", to.free),
         None => println!("[+] Destination address' free balance is is 0\n"),
     }
     // generate extrinsic
-    let xt = api.balance_transfer(MultiAddress::Id(to.clone()), 1000000000000000000);
+    let xt = api.balance_transfer_in_unit(MultiAddress::Id(to.clone()), 1);
 
-    println!(
-        "Transferring from {}, to {}\n",
-        from.public(),
-        to
-    );
+    println!("Transferring from {}, to {}\n", from.public(), to);
 
     println!("[+] Composed extrinsic: {:?}\n", xt);
 

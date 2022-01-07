@@ -57,6 +57,22 @@ where
         )
     }
 
+    pub fn balance_transfer_in_unit(
+        &self,
+        to: GenericAddress,
+        amount: Balance,
+    ) -> BalanceTransferXt {
+        self.balance_transfer(to, amount * self.unit)
+    }
+
+    pub fn balance_transfer_in_munit(
+        &self,
+        to: GenericAddress,
+        amount: Balance,
+    ) -> BalanceTransferXt {
+        self.balance_transfer_in_unit(to, amount * 1_000_000)
+    }
+
     pub fn balance_set_balance(
         &self,
         who: GenericAddress,

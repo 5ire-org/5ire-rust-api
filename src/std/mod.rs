@@ -103,6 +103,7 @@ where
     Client: RpcClient,
 {
     pub signer: Option<P>,
+    pub unit: u128,
     pub genesis_hash: Hash,
     pub metadata: Metadata,
     pub runtime_version: RuntimeVersion,
@@ -148,6 +149,7 @@ where
 
         Ok(Self {
             signer: None,
+            unit: 1,
             genesis_hash,
             metadata,
             runtime_version,
@@ -157,6 +159,11 @@ where
 
     pub fn set_signer(mut self, signer: P) -> Self {
         self.signer = Some(signer);
+        self
+    }
+
+    pub fn set_unit(mut self, unit: u128) -> Self {
+        self.unit = unit;
         self
     }
 
