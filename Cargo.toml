@@ -137,11 +137,3 @@ path = "src/examples/example_get_existential_deposit.rs"
 #git = "https://github.com/paritytech/substrate.git"
 #branch = "master"
 #package = "pallet-contracts"
-
-#[[example]]
-#name = "example_contract"
-#path = "src/examples/example_contract.rs"
-
-#[[example]]
-#name = "example_custom_storage_struct"
-#path = "src/examples/example_custom_storage_struct.rs"
