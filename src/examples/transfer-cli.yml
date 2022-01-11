@@ -1,0 +1,33 @@
+name: "fire-api-client-examples"
+version: "1.0.0"
+about: Example codes showing the api's capabilities
+authors: "5ireChain"
+
+# AppSettings can be defined as a list and are **not** ascii case sensitive
+settings:
+  - ColoredHelp
+
+args:
+  - node-server:
+      short: u
+      long: url
+      help: Set the node server IP address including ws:// or wss:// prefix
+      takes_value: true
+  - node-port:
+      short: p
+      long: port
+      help: Set the websocket port to listen for substrate events
+      takes_value: true
+  - from-mnemonic:
+      short: m
+      required: true
+      long: from-mnemonic
+      help: Set the mnemonic of the sender account
+      takes_value: true
+  - to-address:
+      short: a
+      required: true
+      long: to-address
+      help: Set the destination address
+      takes_value: true
+    
